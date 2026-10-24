@@ -30,5 +30,4 @@ RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
 EXPOSE 8080
 
-# Otomatis bersihkan cache, jalankan migrasi database PostgreSQL, lalu jalankan server
-CMD sh -c "php artisan config:clear && php artisan cache:clear && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=${PORT:-8080}"
+CMD sh -c "php artisan migrate --force && php artisan config:clear && php artisan cache:clear || true && php artisan serve --host=0.0.0.0 --port=${PORT:-8080}"
