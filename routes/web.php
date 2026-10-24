@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\{AdminController,AuthController,CertificateController,HomeController,OrderController,PaintingController};
 
 Route::middleware('guest')->group(function () {
@@ -39,5 +40,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/certificate', [AdminController::class, 'certificate'])->name('certificate.edit');
         Route::put('/certificate', [AdminController::class, 'updateCertificate'])->name('certificate.update');
         Route::resource('paintings', AdminController::class)->except(['show']);
+       Route::get('/run-migrate', function () {
+    Artisan::call('migrate --force');
+    return 'Migrasi berhasil dijalankan: <pre>' . Artisan::output() . '</pre>';
+});
     });
 });
