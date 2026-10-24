@@ -43,6 +43,12 @@ Route::middleware('auth')->group(function () {
        Route::get('/run-migrate', function () {
     Artisan::call('migrate --force');
     return 'Migrasi berhasil dijalankan: <pre>' . Artisan::output() . '</pre>';
+    Route::get('/clear-cache', function () {
+    Artisan::call('route:clear');
+    Artisan::call('config:clear');
+    Artisan::call('cache:clear');
+    return 'Cache berhasil dibersihkan!';
+});
 });
     });
 });
