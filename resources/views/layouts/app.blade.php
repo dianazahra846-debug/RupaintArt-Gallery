@@ -2,7 +2,7 @@
 <html lang="id">
 
 <head>
-    <link rel="icon" type="image/png" href="{{ asset('images/rupaint.jpg') }}">
+    <link rel="icon" type="image/png" href="{{ asset('images/rupaint.jpg', true) }}">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,10 +13,8 @@
         rel="stylesheet"
     >
 
-    <link
-        href="{{ asset('css/style.css') }}"
-        rel="stylesheet"
-    >
+    {{-- Memaksa pemanggilan asset CSS lokal via HTTPS --}}
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 
 <body class="@yield('body-class')">
@@ -129,6 +127,7 @@
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     ></script>
+    {{-- Memaksa pemanggilan JS lokal via HTTPS --}}
     <script src="{{ asset('js/app.js') }}" defer></script>
 
 </body>
