@@ -1,6 +1,6 @@
 FROM php:8.2-fpm
 
-# Install dependensi sistem dan ekstensi PHP
+# Install dependensi sistem & paket pendukung PostgreSQL (libpq-dev)
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y \
     unzip \
     nginx
 
+# Install ekstensi PHP termasuk pdo_pgsql dan pgsql
 RUN docker-php-ext-install pdo_mysql pdo_pgsql pgsql mbstring exif pcntl bcmath gd
 
 # Install Composer
@@ -24,7 +25,7 @@ COPY . .
 # Install dependensi Laravel
 RUN composer install --no-dev --optimize-autoloader
 
-# Atur hak akses folder storage & bootstrap/cache
+# Hak akses folder storage & bootstrap/cache
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
 EXPOSE 8080
